@@ -3,10 +3,9 @@ import TimeStamp from './TimeStamp';
 import PropTypes from 'prop-types';
 
 const ChatEntry = (props) => {
-  // console.log(props.member);
   const heartColor = props.liked ? '❤️':'🤍' ;
-  const localRemote = props.member.local == true ? 'local': 'remote';
-  const senderColor = props.member.color;
+  const localRemote = props.local == true ? 'local': 'remote';
+  const senderColor = props.color;
 
   const handleLikedClicked = () => {
     props.onLikedToggle(props.id);
@@ -27,11 +26,10 @@ const ChatEntry = (props) => {
 };
 
 ChatEntry.propTypes = {
-  member: PropTypes.shape({
-    local: PropTypes.bool.isRequired,
-    color: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
-  }),
+  // member: PropTypes.shape({
+    // }),
+  local: PropTypes.bool.isRequired,
+  color: PropTypes.string.isRequired,
   isLiked: PropTypes.bool,
   sender: PropTypes.string.isRequired,
   id: PropTypes.number,
