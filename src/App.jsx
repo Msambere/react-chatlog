@@ -8,7 +8,7 @@ import { useState } from 'react';
 
 const App = () => {
   const [messageData, setMessageData] = useState(MESSAGES);
-  
+
   const findChatMembers = (messages) =>{
     let chatMembers =[];
     for(let message of messages){
