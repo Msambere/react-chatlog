@@ -1,36 +1,44 @@
 import './App.css';
-import ChatEntry from './components/ChatEntry';
+import ColorChoices from './components/ColorChoices';
 import ChatLog from './components/ChatLog';
 import MESSAGES from './data/messages.json';
 import { useState } from 'react';
 
 
+
 const App = () => {
   const [messageData, setMessageData] = useState(MESSAGES);
-
+  
   const findChatMembers = (messages) =>{
     let chatMembers =[];
-    for (let message of messages){
+    for(let message of messages){
       if (!chatMembers.includes(message.sender)){
         chatMembers.push(message.sender);
       };
     };
+    chatMembers= chatMembers.map((member,i) =>{
+      let memberObj={};
+      memberObj.id = i;
+      memberObj.name = member;
+      memberObj.color= '';
+      memberObj.local= false;
+      return memberObj;
+    });
+    chatMembers[0].local = true;
     return chatMembers;
   };
 
+  const [chatMembers, setChatMembers] = useState(findChatMembers(MESSAGES));
+
   const chatTitle = (members) =>{
     if (members.length == 2) {
-      return `${members[0]} and ${members[1]}`;
-    }else if (members.length > 2) {
-      let lastMember = members.at(-1);
-      let title = members.slice(0,-1).join(', ');
-      return title + `, and ${lastMember}`;
+      return `${members[0].name} and ${members[1].name}`;
+      // }else if (members.length > 2) {
+      //   let lastMember = members.at(-1).name;
+      //   let title = members.slice(0,-1).join(', ');
+      //   return title + `, and ${lastMember}`;
     }
   };
-
-  const chatMembers = findChatMembers(MESSAGES);
-  const localSender = chatMembers[0];
-
 
   const toggleLiked = (messageID)=>{
     setMessageData(messages => {
@@ -44,6 +52,18 @@ const App = () => {
     });
   };
 
+  const changeSenderColor = (name, newColor) =>{
+    setChatMembers(members => {
+      return members.map((member)=>{
+        if (member.name === name) {
+          return {...member, color: newColor};
+        }else{
+          return member;
+        }
+      });
+    });
+  };
+
   const totalLikes = messageData.filter((entry)=> entry.liked === true).length;
 
   return (
@@ -51,11 +71,17 @@ const App = () => {
       <header>
         <h1>Chat Between {chatTitle(chatMembers)}</h1>
         <h2>{totalLikes} ❤️s</h2>
+        <ColorChoices
+          members={chatMembers}
+          changeSenderColor={changeSenderColor}
+        />
       </header>
       <main>
-        <ChatLog entries={messageData} onLikedToggle={toggleLiked} localSender={localSender}/>
-        {/* Wave 01: Render one ChatEntry component
-        Wave 02: Render ChatLog component */}
+        <ChatLog
+          entries={messageData}
+          onLikedToggle={toggleLiked}
+          chatMembers={chatMembers}
+        />
       </main>
     </div>
   );
