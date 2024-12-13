@@ -27,10 +27,31 @@ const App = () => {
     }else if (members.length > 2) {
       let lastMember = members[-1];
       let title= members.slice(0,-1).join(', ');
-      title += ` and ${lastMember}`;
+      title += `, and ${lastMember}`;
       return title;
     }
   };
+
+  const getMemberColorInfo = (messages) =>{
+    let chatMembers = [];
+    let uniqueSenders = new Set();
+    for(let message of messages){
+      if (!uniqueSenders.has(message.sender)){
+        let member = {
+          name: message.sender,
+          color: message.color,
+        };
+        chatMembers.push(member);
+        uniqueSenders.add(message.sender);
+      };
+    };
+    chatMembers= chatMembers.map((member,i) =>{
+      return {...member, id:i};
+    });
+    return chatMembers;
+  };
+
+  const memberColorInfo = getMemberColorInfo(messageData);
 
   const toggleLiked = (messageID)=>{
     setMessageData(messages => {
@@ -65,8 +86,7 @@ const App = () => {
         <h1>Chat Between {chatTitle(chatMembers)}</h1>
         <h2>{totalLikes} ❤️s</h2>
         <ColorChoices
-          members={chatMembers}
-          messages={messageData}
+          memberColorInfo = {memberColorInfo}
           changeSenderColor={changeSenderColor}
         />
       </header>

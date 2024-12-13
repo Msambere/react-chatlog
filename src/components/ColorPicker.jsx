@@ -26,7 +26,6 @@ ColorPicker.propTypes ={
   member: PropTypes.shape({
     name: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-    local: PropTypes.bool.isRequired
   })
 };
 
