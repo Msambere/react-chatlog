@@ -2,7 +2,7 @@
   "name": "react-chatlog",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://MsAmbere.github.io/react-gh-pages",
+  "homepage": "https://msambere.github.io/react-chatlog",
   "type": "module",
   "scripts": {
     "dev": "vite",
