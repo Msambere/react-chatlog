@@ -2,9 +2,8 @@ import PropTypes from 'prop-types';
 import './ColorPicker.css';
 
 const ColorPicker = ({member, changeSenderColor}) =>{
-
   const handleColorChange = (e) => changeSenderColor(member.name, e.target.id);
-  
+
   return(
     <section className="color-picker">
       <h3 className={member.color}>{member.name}&apos;s Color:</h3>
