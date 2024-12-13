@@ -33,10 +33,14 @@ const App = () => {
   const chatTitle = (members) =>{
     if (members.length == 2) {
       return `${members[0].name} and ${members[1].name}`;
-      // }else if (members.length > 2) {
-      //   let lastMember = members.at(-1).name;
-      //   let title = members.slice(0,-1).join(', ');
-      //   return title + `, and ${lastMember}`;
+    }else if (members.length > 2) {
+      let title=``;
+      let lastMember = members.at(-1).name;
+      for (let member of members.slice(0,-1)){
+        title += `${member.name}, `;
+      }
+      title += ` and ${lastMember}`;
+      return title;
     }
   };
 
