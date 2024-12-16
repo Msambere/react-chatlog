@@ -27,7 +27,7 @@ const ChatLog = (props) =>{
 
 ChatLog.propTypes ={
   onLikedToggle: PropTypes.func.isRequired,
-  entries: PropTypes.arrayOf(PropTypes.shape({
+  entries: PropTypes.arrayOf(PropTypes.shape({ // You can create a constant that has this object shape and import it
     id: PropTypes.number.isRequired,
     sender: PropTypes.string.isRequired,
     body: PropTypes.string.isRequired,

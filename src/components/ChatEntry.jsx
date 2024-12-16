@@ -26,8 +26,6 @@ const ChatEntry = (props) => {
 };
 
 ChatEntry.propTypes = {
-  // member: PropTypes.shape({
-    // }),
   local: PropTypes.bool.isRequired,
   color: PropTypes.string.isRequired,
   isLiked: PropTypes.bool,

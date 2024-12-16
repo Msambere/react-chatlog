@@ -18,6 +18,7 @@ const App = () => {
         chatMembers.push(message.sender);
       };
     };
+    // Beenish suggestion: [...new Set(Data.map(message => message.sender))]
     return chatMembers;
   };
 
@@ -25,7 +26,7 @@ const App = () => {
     if (members.length == 2) {
       return `${members[0]} and ${members[1]}`;
     }else if (members.length > 2) {
-      let lastMember = members[-1];
+      let lastMember = members.at(-1);
       let title= members.slice(0,-1).join(', ');
       title += `, and ${lastMember}`;
       return title;
